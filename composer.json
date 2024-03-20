@@ -10,6 +10,7 @@
         "interop-phpobjects/polite-math": "~1.0.6",
         "rindow/rindow-math-buffer-ffi": "~1.0.0",
         "rindow/rindow-openblas-ffi": "~1.0.0",
+        "rindow/rindow-matlib-ffi": "~1.0.0",
         "rindow/rindow-opencl-ffi": "~1.0.0",
         "rindow/rindow-clblast-ffi": "~1.0.0"
     },
