@@ -143,7 +143,6 @@ $mo = new MatrixOperator();
 echo $mo->service()->info();
 ```
 
-
 ```shell
 $ php status.php
 Service Level: Accelerated
