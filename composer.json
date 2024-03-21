@@ -22,5 +22,8 @@
         "psr-4": {
             "Rindow\\Math\\Matrix\\Drivers\\MatlibFFI\\": "src/"
         }
+    },
+    "bin": {
+        "matlibffi.bat": "bin/matlibffi.bat"
     }
 }
