@@ -23,5 +23,5 @@
             "Rindow\\Math\\Matrix\\Drivers\\MatlibFFI\\": "src/"
         }
     },
-    "bin": [ "bin/matlibffi.bat" ]
+    "bin": [ "bin/matlibffi.bat", "bin/matlibffi" ]
 }
