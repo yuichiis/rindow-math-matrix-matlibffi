@@ -26,7 +26,7 @@ jobs:
       - name: Install Libs
         run: |
           if [ 'ffi' == '${{ matrix.ffi }}' ] ; then
-            sudo apt install -y libopenblas-base liblapacke ; fi
+            sudo apt install -y libopenblas-base liblapacke
             wget https://github.com/rindow/rindow-matlib/releases/download/1.0.0/rindow-matlib_1.0.0_amd64.deb
             sudo apt install -y ./rindow-matlib_1.0.0_amd64.deb
             sudo update-alternatives --set librindowmatlib.so /usr/lib/rindowmatlib-serial/librindowmatlib.so
