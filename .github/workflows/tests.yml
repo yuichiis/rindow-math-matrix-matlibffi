@@ -25,7 +25,7 @@ jobs:
 
       - name: Install OpenBLAS
         run: |
-          sudo apt install -y libopenblas-base liblapacke
+          if [ 'ffi' == '${{ matrix.ffi }}' ] ; then sudo apt install -y libopenblas-base liblapacke ; fi
 
       - name: Checkout codes
         uses: "actions/checkout@v4"
