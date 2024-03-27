@@ -60,4 +60,4 @@ jobs:
       #    filter: ReleaseTest
 
       - name: PHPUnit Tests with ${{ matrix.ffi }}.
-        run: phpunit -c tests --filter SelectorTest
+        run: phpunit -c tests
