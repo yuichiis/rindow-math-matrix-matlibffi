@@ -159,10 +159,4 @@ class MatlibFFITest extends TestCase
         $this->assertInstanceOf(\Rindow\Math\Matrix\Drivers\MatlibCL\OpenCLMath::class,$service->mathCL($queue));
         $this->assertInstanceOf(\Rindow\CLBlast\FFI\Math::class,$service->mathCLBlast($queue));
     }
-
-    public function testInfo()
-    {
-        $service = $this->newService();
-        echo $service->info();
-    }
 }
