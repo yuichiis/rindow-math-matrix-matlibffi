@@ -3,7 +3,7 @@ name: tests
 on: [push]
 
 jobs:
-  no_ext_tests:
+  tests:
     runs-on: ubuntu-22.04
 
     strategy:
@@ -23,9 +23,14 @@ jobs:
           #ini-values: "memory_limit=512M"
           extensions: ${{ matrix.ffi }}
 
-      - name: Install OpenBLAS
+      - name: Install Libs
         run: |
-          if [ 'ffi' == '${{ matrix.ffi }}' ] ; then sudo apt install -y libopenblas-base liblapacke ; fi
+          if [ 'ffi' == '${{ matrix.ffi }}' ] ; then
+            sudo apt install -y libopenblas-base liblapacke ; fi
+            wget https://github.com/rindow/rindow-matlib/releases/download/1.0.0/rindow-matlib_1.0.0_amd64.deb
+            sudo apt install -y ./rindow-matlib_1.0.0_amd64.deb
+            sudo update-alternatives --set librindowmatlib.so /usr/lib/rindowmatlib-serial/librindowmatlib.so
+          fi
 
       - name: Checkout codes
         uses: "actions/checkout@v4"
