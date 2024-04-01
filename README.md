@@ -78,14 +78,35 @@ $ php -m | grep FFI
 FFI
 ```
 
-Install the fast matrix calculation library.
-And then set the rindow-matlib to serial mode for use with PHP.
+Download the pre-build binary file.
+
+- https://github.com/rindow/rindow-matlib/releases
+
+Please install using the apt command. 
 ```shell
-$ mkdir -p /your/project/directory
-$ cd /your/project/directory
-$ sudo apt install libopenblas-base liblapacke
-$ wget https://github.com/rindow/rindow-matlib/releases/download/X.X.X/rindow-matlib_X.X.X_amd64.deb
 $ sudo apt install ./rindow-matlib_X.X.X_amd64.deb
+```
+
+Since rindow-matlib currently uses OpenMP, choose the OpenMP version for OpenBLAS as well.
+
+Using the pthread version of OpenBLAS can cause contention, making it unstable and slow.
+
+```shell
+$ sudo apt install libopenblas0-openmp
+$ sudo apt remove libopenblas0-pthread
+```
+
+If you cannot delete the pthread version of OpenBLAS, you can switch to it using the update-alternatives command.
+
+```shell
+$ sudo update-alternatives --config libopenblas.so.0-x86_64-linux-gnu
+$ sudo update-alternatives --config liblapack.so.3-x86_64-linux-gnu
+```
+
+
+If you really want to use the pthread version of OpenBLAS, please switch to the serial version of rindow-matlib.
+
+```shell
 $ sudo update-alternatives --config librindowmatlib.so
 There are 2 choices for the alternative librindowmatlib.so (providing /usr/lib/librindowmatlib.so).
 
@@ -121,7 +142,7 @@ Please download the CLBlast installation script from the rindow-clblast-ffi rele
 $ wget https://github.com/rindow/rindow-clblast-ffi/releases/download/X.X.X/clblast-packdeb.zip
 $ unzip clblast-packdeb.zip
 $ sh clblast-packdeb.sh
-$ sudo apt install ./clblast_X.X.X-1+ubuntuXX.XX_amd64.deb
+$ sudo apt install ./clblast_X.X.X_amd64.deb
 ```
 
 Install the rindow-math-matrix on your project directory.
@@ -145,11 +166,13 @@ echo $mo->service()->info();
 
 ```shell
 $ php status.php
-Service Level: Accelerated
-Buffer Factory: Rindow\Math\Buffer\FFI\BufferFactory
-BLAS Driver: Rindow\OpenBLAS\FFI\Blas
-LAPACK Driver: Rindow\OpenBLAS\FFI\Lapack
-Math Driver: Rindow\Matlib\FFI\Matlib
+Service Level   : Accelerated
+Buffer Factory  : Rindow\Math\Buffer\FFI\BufferFactory
+BLAS Driver     : Rindow\OpenBLAS\FFI\Blas(OPENMP)
+LAPACK Driver   : Rindow\OpenBLAS\FFI\Lapack
+Math Driver     : Rindow\Matlib\FFI\Matlib(OPENMP)
+OpenCL Factory  : Rindow\OpenCL\FFI\OpenCLFactory
+CLBlast Factory : Rindow\CLBlast\FFI\CLBlastFactory
 ```
 
 ### Acceleration with GPU
