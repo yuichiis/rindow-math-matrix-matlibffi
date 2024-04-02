@@ -63,6 +63,14 @@ C:\TMP> PATH %PATH%;\path\to\binary\directories\bin
 C:\TMP> cd \your\progject\directory
 C:\PRJ> composer require rindow/rindow-math-matrix
 C:\PRJ> composer require rindow/rindow-math-matrix-matlibffi
+C:\PRJ> vendor/bin/rindow-math-matrix
+Service Level   : Accelerated
+Buffer Factory  : Rindow\Math\Buffer\FFI\BufferFactory
+BLAS Driver     : Rindow\OpenBLAS\FFI\Blas(THREAD)
+LAPACK Driver   : Rindow\OpenBLAS\FFI\Lapack
+Math Driver     : Rindow\Matlib\FFI\Matlib(OPENMP)
+OpenCL Factory  : Rindow\OpenCL\FFI\OpenCLFactory
+CLBlast Factory : Rindow\CLBlast\FFI\CLBlastFactory
 ```
 
 The OpenCL 1.2 environment is already set up if you are using the Windows standard driver.
@@ -149,6 +157,14 @@ Install the rindow-math-matrix on your project directory.
 ```shell
 $ composer require rindow/rindow-math-matrix
 $ composer require rindow/rindow-math-matrix-matlibffi
+$ vendor/bin/rindow-math-matrix
+Service Level   : Accelerated
+Buffer Factory  : Rindow\Math\Buffer\FFI\BufferFactory
+BLAS Driver     : Rindow\OpenBLAS\FFI\Blas(OPENMP)
+LAPACK Driver   : Rindow\OpenBLAS\FFI\Lapack
+Math Driver     : Rindow\Matlib\FFI\Matlib(OPENMP)
+OpenCL Factory  : Rindow\OpenCL\FFI\OpenCLFactory
+CLBlast Factory : Rindow\CLBlast\FFI\CLBlastFactory
 ```
 
 ### Check driver status
@@ -192,6 +208,6 @@ If you have testable hardware, please test using the proprietary driver.
 
 On the other hand, I tested with Ivy-bridge of Intel CPU and Integrated GPU.
 
-Windows 10 standard OpenCL driver worked fine, but it was very slow and occasionally crashed.
+It now works comfortably with various adjustments on Windows 10 Standard OpenCL Driver. However, the old Intel Integrated GPU is not very high compared to its CPU performance, so please use the right person in the right place.
 
 And it worked fine and fast in Ubuntu 20.04 + beignet-opencl-icd environment.
