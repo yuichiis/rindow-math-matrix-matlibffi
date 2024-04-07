@@ -145,8 +145,13 @@ $ sudo ln -s /usr/lib/clc /usr/local/usr/lib/clc
 ```
 
 And then, Install the fast matrix calculation library for OpenCL.
-Please download the CLBlast installation script from the rindow-clblast-ffi release page.
+If you use Ubuntu22.04 or Debian 12 or later, You can install it from distribution packages.
+```shell
+$ sudo apt install libclblast1
+```
 
+If You use Ubuntu20.04 or Debian 11, You need to download clblast from Github and make deb file.
+Please download the CLBlast installation script from the rindow-clblast-ffi release page.
 ```shell
 $ wget https://github.com/rindow/rindow-clblast-ffi/releases/download/X.X.X/clblast-packdeb.zip
 $ unzip clblast-packdeb.zip
@@ -154,7 +159,7 @@ $ sh clblast-packdeb.sh
 $ sudo apt install ./clblast_X.X.X_amd64.deb
 ```
 
-Install the rindow-math-matrix on your project directory.
+And then, Install the rindow-math-matrix on your project directory.
 ```shell
 $ composer require rindow/rindow-math-matrix
 $ composer require rindow/rindow-math-matrix-matlibffi
