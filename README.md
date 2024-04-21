@@ -28,7 +28,7 @@ Requirements
 - OpenBLAS 0.3.20 or later
 - OpenCL 1.1 or later
 - CLBlast 1.5.2 or later
-- Windows 10/11 or Ubuntu 20.04 LTS or later
+- Windows 10/11 or Linux(Ubuntu 20.04 or Debian 12 or later)
 
 ### Download pre-build binaries from each projects
 
@@ -40,7 +40,8 @@ Download the pre-build binary files from each project's release page.
   - [OpenBLAS](https://github.com/xianyi/OpenBLAS/releases)
   - [CLBlast](https://github.com/CNugteren/CLBlast/releases)
 
-### Setup for Windows
+Setup for Windows
+=================
 
 Download the binary file, unzip it, and copy it to the execution directory.
 
@@ -76,7 +77,8 @@ CLBlast Factory : Rindow\CLBlast\FFI\CLBlastFactory
 The OpenCL 1.2 environment is already set up if you are using the Windows standard driver.
 
 
-### Setup for Ubuntu
+Setup for Linux
+===============
 
 Install each library using the apt command.
 
@@ -102,30 +104,6 @@ This issue does not occur on Windows.
 
 ```shell
 $ sudo apt install libopenblas0-openmp
-$ sudo apt remove libopenblas0-pthread
-```
-
-If you cannot delete the pthread version of OpenBLAS, you can switch to it using the update-alternatives command.
-
-```shell
-$ sudo update-alternatives --config libopenblas.so.0-x86_64-linux-gnu
-$ sudo update-alternatives --config liblapack.so.3-x86_64-linux-gnu
-```
-
-
-If you really want to use the pthread version of OpenBLAS, please switch to the serial version of rindow-matlib.
-
-```shell
-$ sudo update-alternatives --config librindowmatlib.so
-There are 2 choices for the alternative librindowmatlib.so (providing /usr/lib/librindowmatlib.so).
-
-  Selection    Path                                             Priority   Status
-------------------------------------------------------------
-* 0            /usr/lib/rindowmatlib-openmp/librindowmatlib.so   95        auto mode
-  1            /usr/lib/rindowmatlib-openmp/librindowmatlib.so   95        manual mode
-  2            /usr/lib/rindowmatlib-serial/librindowmatlib.so   90        manual mode
-
-Press <enter> to keep the current choice[*], or type selection number: 2
 ```
 
 If you want to use GPU, install the OpenCL environment.
@@ -197,7 +175,47 @@ OpenCL Factory  : Rindow\OpenCL\FFI\OpenCLFactory
 CLBlast Factory : Rindow\CLBlast\FFI\CLBlastFactory
 ```
 
-### Acceleration with GPU
+### Troubleshooting for Linux
+Since rindow-matlib currently uses OpenMP, choose the OpenMP version for OpenBLAS as well.
+
+Using the pthread version of OpenBLAS can cause conflicts and become unstable and slow.
+This issue does not occur on Windows.
+
+If you have already installed the pthread version of OpenBLAS,
+```shell
+$ sudo apt remove libopenblas0-pthread
+```
+
+But if you can't remove it, you can switch to it using the update-alternatives command.
+
+```shell
+$ sudo update-alternatives --config libopenblas.so.0-x86_64-linux-gnu
+$ sudo update-alternatives --config liblapack.so.3-x86_64-linux-gnu
+```
+
+If you really want to use the pthread version of OpenBLAS, please switch to the serial version of rindow-matlib.
+
+There are no operational mode conflicts with OpenBLAS on Windows.
+
+But, If you really want to use the pthread version of OpenBLAS, please switch to the serial version of rindow-matlib.
+
+```shell
+$ sudo update-alternatives --config librindowmatlib.so
+There are 2 choices for the alternative librindowmatlib.so (providing /usr/lib/librindowmatlib.so).
+
+  Selection    Path                                             Priority   Status
+------------------------------------------------------------
+* 0            /usr/lib/rindowmatlib-openmp/librindowmatlib.so   95        auto mode
+  1            /usr/lib/rindowmatlib-openmp/librindowmatlib.so   95        manual mode
+  2            /usr/lib/rindowmatlib-serial/librindowmatlib.so   90        manual mode
+
+Press <enter> to keep the current choice[*], or type selection number: 2
+```
+Choose the "rindowmatlib-serial".
+
+
+Acceleration with GPU
+=====================
 
 You can use GPU acceleration on OpenCL.
 
