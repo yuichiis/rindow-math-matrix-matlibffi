@@ -1,5 +1,6 @@
 Rindow Math Matrix's Drivers for Matlib with PHP FFI
 ====================================================
+
 Status:
 [![Build Status](https://github.com/rindow/rindow-math-matrix-matlibffi/workflows/tests/badge.svg)](https://github.com/rindow/rindow-math-matrix-matlibffi/actions)
 [![Downloads](https://img.shields.io/packagist/dt/rindow/rindow-math-matrix-matlibffi)](https://packagist.org/packages/rindow/rindow-math-matrix-matlibffi)
@@ -152,6 +153,7 @@ CLBlast Factory : Rindow\CLBlast\FFI\CLBlastFactory
 ```
 
 ### Check driver status
+
 You can check the driver settings by running the sample below.
 ```php
 <?php
@@ -176,6 +178,7 @@ CLBlast Factory : Rindow\CLBlast\FFI\CLBlastFactory
 ```
 
 ### Troubleshooting for Linux
+
 Since rindow-matlib currently uses OpenMP, choose the OpenMP version for OpenBLAS as well.
 
 Using the pthread version of OpenBLAS can cause conflicts and become unstable and slow.
