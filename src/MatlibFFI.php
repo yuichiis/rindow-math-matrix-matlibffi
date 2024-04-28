@@ -29,6 +29,8 @@ class MatlibFFI extends AbstractMatlibService
         if($bufferFactory===null && class_exists(BufferFactory::class)) {
             $bufferFactory = new BufferFactory();
             $this->logging(0,get_class($bufferFactory).' found.');
+        } elseif($bufferFactory===null) {
+            $this->logging(0,get_class(BufferFactory::class).' found.');
         }
         if($openblasFactory===null && class_exists(OpenBLASFactory::class)) {
             $openblasFactory = new OpenBLASFactory();
@@ -37,6 +39,8 @@ class MatlibFFI extends AbstractMatlibService
         if($mathFactory===null && class_exists(MatlibFactory::class)) {
             $mathFactory = new MatlibFactory();
             $this->logging(0,get_class($mathFactory).' found.');
+        } elseif($mathFactory===null) {
+            $this->logging(0,get_class(MatlibFactory::class).'not found.');
         }
         if($openclFactory===null && class_exists(OpenCLFactory::class)) {
             $openclFactory = new OpenCLFactory();
