@@ -104,7 +104,7 @@ Using the pthread version of OpenBLAS can cause conflicts and become unstable an
 This issue does not occur on Windows.
 
 ```shell
-$ sudo apt install libopenblas0-openmp
+$ sudo apt install libopenblas0-openmp liblapacke
 ```
 
 If you want to use GPU, install the OpenCL environment.
