@@ -13,67 +13,51 @@ class MatlibFFI extends AbstractMatlibService
 {
     protected string $name = 'matlib_ffi';
 
-    public function __construct(
-        object $bufferFactory=null,
-        object $mathFactory=null,
-        object $openblasFactory=null,
-        object $openclFactory=null,
-        object $clblastFactory=null,
-        object $blasCLFactory=null,
-        object $mathCLFactory=null,
-        object $bufferCLFactory=null,
-        int $verbose=null,
-        )
+    protected function injectDefaultFactories() : void
     {
-        $this->setVerbose($verbose);
-        if($bufferFactory===null && class_exists(BufferFactory::class)) {
-            $bufferFactory = new BufferFactory();
-            $this->logging(0,get_class($bufferFactory).' found.');
-        } elseif($bufferFactory===null) {
-            $this->logging(0,BufferFactory::class.' ** not found.');
+        if($this->bufferFactory===null) {
+            if(class_exists(BufferFactory::class)) {
+                $this->bufferFactory = new BufferFactory();
+            } else {
+                $this->logging(0,BufferFactory::class.' ** not found.');
+            }
         }
-        if($openblasFactory===null && class_exists(OpenBLASFactory::class)) {
-            $openblasFactory = new OpenBLASFactory();
-            $this->logging(0,get_class($openblasFactory).' found.');
-        } elseif($mathFactory===null) {
-            $this->logging(0,OpenBLASFactory::class.' ** not found **.');
+        if($this->openblasFactory===null) {
+            if(class_exists(OpenBLASFactory::class)) {
+                $this->openblasFactory = new OpenBLASFactory();
+            } else {
+                $this->logging(0,OpenBLASFactory::class.' ** not found **.');
+            }
         }
-        if($mathFactory===null && class_exists(MatlibFactory::class)) {
-            $mathFactory = new MatlibFactory();
-            $this->logging(0,get_class($mathFactory).' found.');
-        } elseif($mathFactory===null) {
-            $this->logging(0,MatlibFactory::class.' ** not found **.');
+        if($this->mathFactory===null) {
+            if(class_exists(MatlibFactory::class)) {
+                $this->mathFactory = new MatlibFactory();
+            } else {
+                $this->logging(0,MatlibFactory::class.' ** not found **.');
+            }
         }
-        if($openclFactory===null && class_exists(OpenCLFactory::class)) {
-            $openclFactory = new OpenCLFactory();
-            $this->logging(0,get_class($openclFactory).' found.');
-        } elseif($mathFactory===null) {
-            $this->logging(0,OpenCLFactory::class.' ** not found **.');
+        if($this->openclFactory===null) {
+            if(class_exists(OpenCLFactory::class)) {
+                $this->openclFactory = new OpenCLFactory();
+            } else {
+                $this->logging(0,OpenCLFactory::class.' ** not found **.');
+            } 
         }
-        $bufferCLFactory = $bufferCLFactory ?? $openclFactory;
-        if($clblastFactory===null && class_exists(CLBlastFactory::class)) {
-            $clblastFactory = new CLBlastFactory();
-            $this->logging(0,get_class($clblastFactory).' found.');
-        } elseif($mathFactory===null) {
-            $this->logging(0,CLBlastFactory::class.' ** not found **.');
+        $this->bufferCLFactory ??= $this->openclFactory;
+        if($this->clblastFactory===null) { 
+            if(class_exists(CLBlastFactory::class)) {
+               $this->clblastFactory = new CLBlastFactory();
+            } else {
+                $this->logging(0,CLBlastFactory::class.' ** not found **.');
+            }
         }
-        $blasCLFactory = $blasCLFactory ?? $clblastFactory;
-        if($mathCLFactory===null && class_exists(MatlibCLFactory::class)) {
-            $mathCLFactory = new MatlibCLFactory();
-            $this->logging(0,get_class($mathCLFactory).' found.');
-        } elseif($mathFactory===null) {
-            $this->logging(0,MatlibCLFactory::class.' ** not found **.');
+        $this->blasCLFactory ??= $this->clblastFactory;
+        if($this->mathCLFactory===null) {
+            if(class_exists(MatlibCLFactory::class)) {
+                $this->mathCLFactory = new MatlibCLFactory();
+            } else {
+                $this->logging(0,MatlibCLFactory::class.' ** not found **.');
+            }
         }
-
-        parent::__construct(
-            bufferFactory:$bufferFactory,
-            openblasFactory:$openblasFactory,
-            mathFactory:$mathFactory,
-            openclFactory:$openclFactory,
-            clblastFactory:$clblastFactory,
-            blasCLFactory:$blasCLFactory,
-            mathCLFactory:$mathCLFactory,
-            bufferCLFactory:$bufferCLFactory,
-        );
     }
 }
