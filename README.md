@@ -29,7 +29,6 @@ Requirements
 - OpenBLAS 0.3.20 or later
 - OpenCL 1.1 or later
 - CLBlast 1.5.2 or later
-- Windows(10/11) or Linux(Ubuntu 20.04 or Debian 12 or later)
 
 ### Download pre-build binaries from each projects
 
