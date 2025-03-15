@@ -7,7 +7,13 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-22.04
+    runs-on: ${{ matrix.os }}
+    env:
+      matlib: 1.1.0
+      testlib: 1.1.0
+      matlibrepo: /rindow/rindow-matlib
+      mathmatrix: 2.1.0
+      mathmatrixrepo: /rindow/rindow-math-matrix
 
     strategy:
       fail-fast: true
@@ -18,22 +24,14 @@ jobs:
             os: ubuntu-latest
             php: '8.1'
             phpunit: '10.5'
-          - name: PHP8.3
-            os: ubuntu-latest
-            php: '8.3'
-            phpunit: '11.5'
+#          - name: PHP8.3
+#            os: ubuntu-latest
+#            php: '8.3'
+#            phpunit: '11.5'
           - name: PHP8.4
             os: ubuntu-latest
             php: '8.4'
             phpunit: '11.5'
-#          - name: Windows
-#            os: windows-latest
-#            php: '8.4'
-#            phpunit: '11.5'
-#          - name: macOS
-#            os: macos-latest
-#            php: '8.4'
-#            phpunit: '11.5'
   
     steps:
       - name: Setup PHP ${{ matrix.php }}
@@ -42,17 +40,16 @@ jobs:
           php-version: ${{ matrix.php }}
           # PHP Extras
           coverage: none
-          tools: composer, phpunit:10.5
+          tools: composer, phpunit:${{ matrix.phpunit }}
           #ini-values: "memory_limit=512M"
           extensions: ${{ matrix.ffi }}
 
-      - name: Install Libs
+      - name: Install Libs (Linux)
         run: |
           if [ 'ffi' == '${{ matrix.ffi }}' ] ; then
             sudo apt install -y libopenblas-base liblapacke
-            wget https://github.com/rindow/rindow-matlib/releases/download/1.0.0/rindow-matlib_1.0.0_amd64.deb
-            sudo apt install -y ./rindow-matlib_1.0.0_amd64.deb
-            sudo update-alternatives --set librindowmatlib.so /usr/lib/rindowmatlib-serial/librindowmatlib.so
+            wget https://github.com/${matlibrepo}/releases/download/${testlib}/rindow-matlib_${matlib}-`lsb_release -sr`_amd64.deb
+            sudo apt install -y ./rindow-matlib_${matlib}-`lsb_release -sr`_amd64.deb
           fi
 
       - name: Checkout codes
@@ -60,8 +57,8 @@ jobs:
 
       - name: Checkout math-matrix tests
         run: |
-          ( cd .. && git clone https://github.com/rindow/rindow-math-matrix )
-          ( cd ../rindow-math-matrix && git checkout 2.0.4 )
+          ( cd .. && git clone https://github.com/${mathmatrixrepo} )
+          ( cd ../rindow-math-matrix && git checkout ${mathmatrix} )
 
       #- name: Composer
       #  uses: php-actions/composer@v6
@@ -72,11 +69,14 @@ jobs:
       - name: Composer
         run: composer update
 
+      #- name: PHP Static Analysys
+      #  uses: php-actions/phpstan@v3
+      #  with:
+      #    php_version: ${{ matrix.php }}
+      #    path: src/
+
       - name: PHP Static Analysys
-        uses: php-actions/phpstan@v3
-        with:
-          php_version: ${{ matrix.php }}
-          path: src/
+        run: phpstan
 
       #- name: PHPUnit Tests
       #  uses: php-actions/phpunit@v3
