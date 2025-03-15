@@ -45,7 +45,7 @@ jobs:
       - name: Install Libs (Linux)
         if: ${{ startsWith(matrix.os, 'ubuntu-')  && matrix.ffi == 'ffi' }}
         run: |
-            sudo apt install -y libopenblas-base liblapacke
+            sudo apt install -y libopenblas0 liblapacke
             wget https://github.com/${matlibrepo}/releases/download/${testlib}/rindow-matlib_${matlib}-`lsb_release -sr`_amd64.deb
             sudo apt install -y ./rindow-matlib_${matlib}-`lsb_release -sr`_amd64.deb
 
