@@ -118,16 +118,17 @@ jobs:
           $currentDir = (Get-Location).Path
           $matlibDir = Join-Path -Path $currentDir -ChildPath 'matlib\bin'
           $env:PATH = "$matlibDir;$env:PATH"
-          git clone  --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }}
-          $testDir = Join-Path -Path $currentDir -ChildPath 'rindow-math-matrix\tests'
-          phpunit -c $testDir
+          echo $currentDir
+          ( cd .. && git clone  --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }} )
+          dir ..
+          phpunit -c tests
 
       - name: PHPUnit Tests (macOS)
-        if: ${{ startsWith(matrix.os, 'macos-13') }}
+        if: ${{ startsWith(matrix.os, 'macos-latest') }}
         run: |
           brew install libomp
-          curl https://github.com/${{ env.matlibrepo }}/releases/download/${{ env.testlib }}/rindow-matlib-${{ env.matlib }}-Darwin-x86_64.tar.gz -O -L
-          tar -xzf rindow-matlib-${{ env.matlib }}-Darwin-x86_64.tar.gz
+          curl https://github.com/${{ env.matlibrepo }}/releases/download/${{ env.testlib }}/rindow-matlib-${{ env.matlib }}-Darwin-arm64.tar.gz -O -L
+          tar -xzf rindow-matlib-${{ env.matlib }}-Darwin-arm64.tar.gz
           sudo cp -r usr/include /usr/local/
           sudo cp -r usr/lib /usr/local/
           ( cd .. && git clone https://github.com/${{ env.mathmatrixrepo }} )
