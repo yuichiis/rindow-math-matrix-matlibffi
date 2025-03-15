@@ -116,8 +116,8 @@ jobs:
           Invoke-WebRequest -Uri https://github.com/${{ env.matlibrepo }}/releases/download/${{ env.testlib }}/rindow-matlib-${{ env.matlib }}-win64.zip -OutFile matlib.zip
           Expand-Archive -Path matlib.zip
           $currentDir = (Get-Location).Path
-          $matlibDir = Join-Path -Path $currentDir -ChildPath 'matlib\bin'
-          $env:PATH = "$matlibDir;$env:PATH"
+          $matlibDir = Join-Path -Path $currentDir -ChildPath 'matlib'
+          $env:PATH = "$matlibDir/bin;$env:PATH"
           dir $matlibDir/bin
           git clone  --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }} ../rindow-math-matrix
           phpunit -c tests
