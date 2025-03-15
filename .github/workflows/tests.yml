@@ -119,9 +119,9 @@ jobs:
           $currentDir = (Get-Location).Path
           $matlibDir = Join-Path -Path $currentDir -ChildPath 'matlib\bin'
           $env:PATH = "$matlibDir;$env:PATH"
-          ( cd .. && git clone https://github.com/${{ env.mathmatrixrepo }} )
-          ( cd ../rindow-math-matrix && git checkout ${{ env.mathmatrix }} )
-          phpunit -c tests
+          git clone https://github.com/${{ env.mathmatrixrepo }}
+          ( cd rindow-math-matrix && git checkout ${{ env.mathmatrix }} )
+          phpunit -c rindow-math-matrix/tests
 
       - name: PHPUnit Tests (macOS)
         if: ${{ startsWith(matrix.os, 'macos-13') }}
