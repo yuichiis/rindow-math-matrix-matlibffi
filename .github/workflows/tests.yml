@@ -119,7 +119,9 @@ jobs:
           $matlibDir = Join-Path -Path $currentDir -ChildPath 'matlib\bin'
           $env:PATH = "$matlibDir;$env:PATH"
           echo $currentDir
-          ( cd .. && git clone  --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }} )
+          dir
+          git clone  --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }} ../rindow-math-matrix
+          echo $currentDir\..
           dir ..
           phpunit -c tests
 
