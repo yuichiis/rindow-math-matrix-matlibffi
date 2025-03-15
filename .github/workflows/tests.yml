@@ -62,16 +62,16 @@ jobs:
         if: ${{ startsWith(matrix.os, 'ubuntu-')  && matrix.ffi == 'ffi' }}
         run: |
             sudo apt install -y libopenblas0 liblapacke
-            wget https://github.com/${matlibrepo}/releases/download/${testlib}/rindow-matlib_${matlib}-`lsb_release -sr`_amd64.deb
-            sudo apt install -y ./rindow-matlib_${matlib}-`lsb_release -sr`_amd64.deb
+            wget https://github.com/${{ env.matlibrepo }}/releases/download/${{ env.testlib }}/rindow-matlib_${{ env.matlib }}-`lsb_release -sr`_amd64.deb
+            sudo apt install -y ./rindow-matlib_${{ env.matlib }}-`lsb_release -sr`_amd64.deb
 
       - name: Checkout codes
         uses: "actions/checkout@v4"
 
       - name: Checkout math-matrix tests
         run: |
-          ( cd .. && git clone https://github.com/${mathmatrixrepo} )
-          ( cd ../rindow-math-matrix && git checkout ${mathmatrix} )
+          ( cd .. && git clone https://github.com/${{ env.mathmatrixrepo }} )
+          ( cd ../rindow-math-matrix && git checkout ${{ env.mathmatrix }} )
 
       #- name: Composer
       #  uses: php-actions/composer@v6
