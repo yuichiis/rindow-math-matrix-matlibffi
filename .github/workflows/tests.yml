@@ -71,8 +71,7 @@ jobs:
       - name: Checkout math-matrix tests
         if: ${{ startsWith(matrix.os, 'ubuntu-') }}
         run: |
-          ( cd .. && git clone https://github.com/${{ env.mathmatrixrepo }} )
-          ( cd ../rindow-math-matrix && git checkout ${{ env.mathmatrix }} )
+          ( cd .. && git clone --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }} )
 
       #- name: Composer
       #  uses: php-actions/composer@v6
@@ -119,9 +118,9 @@ jobs:
           $currentDir = (Get-Location).Path
           $matlibDir = Join-Path -Path $currentDir -ChildPath 'matlib\bin'
           $env:PATH = "$matlibDir;$env:PATH"
-          git clone https://github.com/${{ env.mathmatrixrepo }}
-          ( cd rindow-math-matrix && git checkout ${{ env.mathmatrix }} )
-          phpunit -c rindow-math-matrix/tests
+          git clone  --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }}
+          $testDir = Join-Path -Path $currentDir -ChildPath 'rindow-math-matrix\tests'
+          phpunit -c $testDir
 
       - name: PHPUnit Tests (macOS)
         if: ${{ startsWith(matrix.os, 'macos-13') }}
