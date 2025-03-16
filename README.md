@@ -24,7 +24,7 @@ Requirements
 ============
 
 - PHP 8.1 or PHP8.2 or PHP8.3 or PHP8.4
-- Rindow Math Matrix v2.1.x
+- Rindow Math Matrix v2.0 or later
 - Rindow Matlib 1.0.0 or later
 - OpenBLAS 0.3.20 or later
 - OpenCL 1.1 or later
