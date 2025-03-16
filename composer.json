@@ -16,7 +16,7 @@
         "rindow/rindow-clblast-ffi": "^1.0.2"
     },
     "suggest": {
-        "rindow/rindow-math-plot": "for OpenCL tunning"
+        "rindow/rindow-math-plot": "Graphics for tunning OpenCL "
     },
     "autoload": {
         "psr-4": {
