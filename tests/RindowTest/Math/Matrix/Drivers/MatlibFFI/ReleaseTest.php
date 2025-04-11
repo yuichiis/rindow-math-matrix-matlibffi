@@ -20,4 +20,10 @@ class ReleaseTest extends TestCase
         $clblast = new CLBlastFactory();
         $this->assertTrue(extension_loaded('ffi'));
     }
+
+    public function testFFILoaded()
+    {
+        $mo = new \Rindow\Math\Matrix\MatrixOperator();
+        $this->assertTrue($mo->isAdvanced());
+    }
 }
