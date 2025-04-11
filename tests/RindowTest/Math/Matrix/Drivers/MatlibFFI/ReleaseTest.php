@@ -24,6 +24,11 @@ class ReleaseTest extends TestCase
     public function testFFILoaded()
     {
         $mo = new \Rindow\Math\Matrix\MatrixOperator();
+        if($mo->isAdvanced()) {
+            echo "Advanced mode\n";
+        } else {
+            echo "NOT Advanced mode\n";
+        }
         $this->assertTrue($mo->isAdvanced());
     }
 }
