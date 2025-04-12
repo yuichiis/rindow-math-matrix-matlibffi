@@ -29,6 +29,8 @@ class ReleaseTest extends TestCase
         } else {
             echo "NOT Advanced mode\n";
         }
+        $matlib = new MatlibFactory();
+        var_dump($matlib->config());
         $this->assertTrue($mo->isAdvanced());
     }
 }
