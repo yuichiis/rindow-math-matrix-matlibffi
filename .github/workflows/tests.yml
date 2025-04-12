@@ -121,4 +121,4 @@ jobs:
           ( cd .. && git clone https://github.com/${{ env.mathmatrixrepo }} )
           ( cd ../rindow-math-matrix && git checkout ${{ env.mathmatrix }} )
           vendor/bin/rindow-math-matrix -v
-          vendor/bin/phpunit -c tests --filter LinearAlgebraTest::testGemmNormal
+          vendor/bin/phpunit -c tests --filter LinearAlgebraTest::testGemm
