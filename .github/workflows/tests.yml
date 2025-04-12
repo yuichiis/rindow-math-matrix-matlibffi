@@ -121,6 +121,6 @@ jobs:
           sudo cp -r usr/include /usr/local/
           sudo cp -r usr/lib /usr/local/
           ( cd .. && git clone https://github.com/${{ env.mathmatrixrepo }} )
-          ( cd ../rindow-math-matrix && git checkout ${{ env.mathmatrix }} )
+          ( cd ../rindow-math-matrix && git switch ${{ env.mathmatrix }} )
           vendor/bin/rindow-math-matrix -v
           vendor/bin/phpunit -c tests --filter LinearAlgebraTest::testSy
