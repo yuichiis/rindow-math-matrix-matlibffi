@@ -10,8 +10,10 @@ jobs:
       matlib: 1.1.0
       testlib: 1.1.0
       matlibrepo: rindow/rindow-matlib
-      mathmatrix: 2.1.1
-      mathmatrixrepo: rindow/rindow-math-matrix
+      mathmatrix: workspace
+      mathmatrixrepo: yuichiis/rindow-math-matrix
+      #mathmatrix: 2.1.1
+      #mathmatrixrepo: rindow/rindow-math-matrix
 
     strategy:
       fail-fast: true
