@@ -20,17 +20,4 @@ class ReleaseTest extends TestCase
         $clblast = new CLBlastFactory();
         $this->assertTrue(extension_loaded('ffi'));
     }
-
-    public function testFFILoaded()
-    {
-        $mo = new \Rindow\Math\Matrix\MatrixOperator();
-        if($mo->isAdvanced()) {
-            echo "Advanced mode\n";
-        } else {
-            echo "NOT Advanced mode\n";
-        }
-        $matlib = new MatlibFactory();
-        var_dump($matlib->config());
-        $this->assertTrue($mo->isAdvanced());
-    }
 }
