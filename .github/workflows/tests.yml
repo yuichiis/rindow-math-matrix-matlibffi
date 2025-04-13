@@ -112,11 +112,11 @@ jobs:
       - name: PHP Static Analysys
         run: phpstan
 
-      - name: PHPUnit Tests with ${{ matrix.ffi }}.
+      - name: PHPUnit Tests (Linux)
         if: ${{ startsWith(matrix.os, 'ubuntu-') && matrix.ffi == 'ffi' }}
         run: vendor/bin/phpunit -c tests/checkadvanced.xml
 
-      - name: PHPUnit Tests
+      - name: PHPUnit Tests (Windows)
         if: ${{ startsWith(matrix.os, 'windows-') && matrix.ffi == 'ffi' }}
         run: |
           Invoke-WebRequest -Uri https://github.com/OpenMathLib/OpenBLAS/releases/download/v0.3.27/OpenBLAS-0.3.27-x64.zip -OutFile openblas.zip
@@ -141,11 +141,11 @@ jobs:
           vendor/bin/rindow-math-matrix -v
           vendor/bin/phpunit -c tests/checkadvanced.xml
 
-      - name: PHPUnit Tests with ${{ matrix.ffi }}.
+      - name: PHPUnit Tests (Linux) without FFI.
         if: ${{ startsWith(matrix.os, 'ubuntu-') && matrix.ffi == '' }}
         run: vendor/bin/phpunit -c tests
 
-      - name: PHPUnit Tests
+      - name: PHPUnit Tests (Windows) without FFI.
         if: ${{ startsWith(matrix.os, 'windows-') && matrix.ffi == '' }}
         run: |
           Invoke-WebRequest -Uri https://github.com/OpenMathLib/OpenBLAS/releases/download/v0.3.27/OpenBLAS-0.3.27-x64.zip -OutFile openblas.zip
@@ -160,10 +160,10 @@ jobs:
           $matlibDir = Join-Path -Path $currentDir -ChildPath 'matlib'
           $env:PATH = "$matlibDir/bin;$env:PATH"
           dir $matlibDir/bin
-          git clone  --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }} ../rindow-math-matrix
+          git clone --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }} ../rindow-math-matrix
           vendor/bin/phpunit -c tests
 
-      - name: PHPUnit Tests (macOS)
+      - name: PHPUnit Tests (macOS) without FFI.
         if: ${{ startsWith(matrix.os, 'macos-') && matrix.ffi == '' }}
         run: |
           git clone --branch ${{ env.mathmatrix }} https://github.com/${{ env.mathmatrixrepo }} ../rindow-math-matrix
