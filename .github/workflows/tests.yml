@@ -10,8 +10,6 @@ jobs:
       matlib: 1.1.1
       testlib: 1.1.1
       matlibrepo: rindow/rindow-matlib
-      #mathmatrix: workspace
-      #mathmatrixrepo: rindow/rindow-math-matrix
       mathmatrix: 2.1.2
       mathmatrixrepo: rindow/rindow-math-matrix
 
