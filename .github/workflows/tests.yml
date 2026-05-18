@@ -65,6 +65,8 @@ jobs:
             phpunit: '11.5'
             ffi: 'ffi'
   
+    name: PHP ${{ matrix.php }} on ${{ matrix.os }}
+
     steps:
       - name: Setup PHP ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
