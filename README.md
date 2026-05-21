@@ -23,7 +23,7 @@ Rindow Math Matrix's repository is [here](https://github.com/rindow/rindow-math-
 Requirements
 ============
 
-- PHP 8.1 or PHP8.2 or PHP8.3 or PHP8.4
+- PHP 8.1 or later
 - Rindow Math Matrix v2.0 or later
 - Rindow Matlib 1.0.0 or later
 - OpenBLAS 0.3.20 or later(Linux/Windows), vecLib(macOS)
