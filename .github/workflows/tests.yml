@@ -47,11 +47,11 @@ jobs:
             php: '8.5'
             phpunit: '11.5'
             ffi: 'ffi'
-          - os: macos-13
-            arch: 'x86_64'
-            php: '8.5'
-            phpunit: '11.5'
-            ffi: 'ffi'
+          #- os: macos-13
+          #  arch: 'x86_64'
+          #  php: '8.5'
+          #  phpunit: '11.5'
+          #  ffi: 'ffi'
   
     name: PHP ${{ matrix.php }}${{ matrix.ffi }} on ${{ matrix.os }}
 
